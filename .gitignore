@@ -12,7 +12,8 @@ network-security.data
 irony
 dmenu-items
 config.el
-recentf
+packages-config.el
+*recentf*
 smex-items
 snippets
 tramp
@@ -22,3 +23,7 @@ elpa
 transient
 auto-complete-love
 auto-complete-lua
+emacs
+bookmarks
+elpy
+elpy/*
