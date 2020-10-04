@@ -44,7 +44,7 @@
 
 (require 'init-magit)
 (require 'init-flycheck)
-(require 'init-elpy)
+(require 'init-javascript)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
