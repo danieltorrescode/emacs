@@ -1,5 +1,10 @@
+;;; init-swiper.el --- Summary
+;;; Commentary:
+
 ;; Swiper gives us a really efficient incremental search 
 ;; with regular expressions
+
+;;; Code:
 
 
 (use-package swiper
@@ -18,3 +23,5 @@
     ))
 
 (provide 'init-swiper)
+
+;;; init-swiper.el ends here

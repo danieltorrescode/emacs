@@ -1,3 +1,8 @@
+;;; init-javascript.el --- Summary
+;;; Commentary:
+;;; Code:
+
+
 ;; (use-package js2-mode
 ;;   :ensure t
 ;;   :init
@@ -37,3 +42,5 @@
 ;; ))
 
 (provide 'init-javascript)
+
+;;; init-javascript.el ends here

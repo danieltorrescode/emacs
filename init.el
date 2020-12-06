@@ -1,3 +1,7 @@
+;;; init.el --- Summary
+;;; Commentary:
+;;; Code:
+
 (require 'package)
 (setq package-enable-at-startup nil)
 
@@ -44,7 +48,7 @@
 
 (require 'init-magit)
 (require 'init-flycheck)
-(require 'init-javascript)
+;;(require 'init-javascript)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -62,3 +66,5 @@
  )
 
 (provide 'init)
+
+;;; init.el ends here

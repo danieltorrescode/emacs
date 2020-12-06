@@ -1,3 +1,7 @@
+;;; init-dashboard.el --- Summary
+;;; Commentary:
+;;; Code:
+
 (use-package dashboard
   :ensure t
   :config
@@ -50,3 +54,5 @@
 (setq dashboard-set-footer nil)
 
 (provide 'init-dashboard)
+
+;;; init-dashboard.el ends here

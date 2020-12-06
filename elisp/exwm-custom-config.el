@@ -1,3 +1,7 @@
+;;; exwm-custom-config.el --- Summary
+;;; Commentary:
+;;; Code:
+
 ;; Also shrink fringes to 1 pixel.
 ;; (fringe-mode 1)
 
@@ -151,3 +155,5 @@
 (exwm-enable)
 
 (provide 'exwm-custom-config)
+
+;;; exwm-custom-config.el ends here

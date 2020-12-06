@@ -1,3 +1,7 @@
+;;; init-auto-complete.el --- Summary
+;;; Commentary:
+;;; Code:
+
 (use-package auto-complete 
  :ensure t
 :init
@@ -19,3 +23,5 @@
 (real-global-auto-complete-mode t)
 
 (provide 'init-auto-complete)
+
+;;; init-auto-complete.el ends here

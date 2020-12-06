@@ -1,3 +1,7 @@
+;;; init-elpy.el --- Summary
+;;; Commentary:
+;;; Code:
+
 (use-package elpy
   :ensure t
   :init
@@ -9,3 +13,5 @@
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
 (provide 'init-elpy)
+
+;;; init-elpy.el ends here

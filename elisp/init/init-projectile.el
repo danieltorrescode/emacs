@@ -1,3 +1,7 @@
+;;; init-projectile.el --- Summary
+;;; Commentary:
+;;; Code:
+
 ;;This makes sure that everything can be a project.
 (use-package projectile
     :ensure t
@@ -8,3 +12,5 @@
 (global-set-key (kbd "<f5>") 'projectile-compile-project)
 
 (provide 'init-projectile)
+
+;;; init-projectile.el ends here

@@ -1,5 +1,7 @@
-;; emacs.el
-;;***********************************************
+;;; emacs-config.el --- Summary
+;;; Commentary:
+;;; Code:
+
 ;; Disable menus and scrollbars
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -143,3 +145,4 @@
 (setq debug-on-error t)
 
 (provide 'emacs-config)
+;;; emacs-config.el ends here

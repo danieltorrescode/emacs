@@ -1,5 +1,10 @@
+;;; init-wallpaper.el --- Summary
+;;; Commentary:
 ;; This is an example `use-package' configuration
 ;; It is not tangled into wallpaper.el
+
+;;; Code:
+
 (use-package wallpaper
   :ensure t
   :hook ((exwm-randr-screen-change . wallpaper-set-wallpaper)))
@@ -23,3 +28,5 @@
 (setq wallpaper-static-wallpapers '~/.config/wallpaper.png)
 
 (provide 'init-wallpaper)
+
+;;; init-wallpaper.el ends here

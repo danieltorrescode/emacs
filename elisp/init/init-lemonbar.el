@@ -1,3 +1,7 @@
+;;; init-lemonbar.el --- Summary
+;;; Commentary:
+;;; Code:
+
 ;; get workspace list in bar
 (defun feb/exwm-workspace-list ()
   "Return a lemonbar string showing workspace list."
@@ -17,3 +21,5 @@
 (add-hook 'exwm-init-hook #'feb/exwm-report-workspaces-to-lemonbar)
 
 (provide 'init-lemonbar)
+
+;;; init-lemonbar.el ends here

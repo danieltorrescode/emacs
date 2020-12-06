@@ -1,4 +1,8 @@
+;;; init-ivy.el --- Summary
+;;; Commentary:
 ;; Ivy / Counsel replace a lot of ido or helms completion functionality
+
+;;; Code:
 
 (use-package ivy
 :ensure t
@@ -11,3 +15,5 @@
 (setq ivy-display-style 'fancy))
 
 (provide 'init-ivy)
+
+;;; init-ivy.el ends here

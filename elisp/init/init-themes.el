@@ -1,4 +1,6 @@
-;; themes.el
+;;; init-themes.el --- Summary
+;;; Commentary:
+;;; Code:
 
 ;;(setq custom-safe-themes t)
 ;;(add-to-list 'custom-theme-load-path (concat user-emacs-directory "elisp/"))
@@ -23,3 +25,4 @@
 
 (provide 'init-themes)
 
+;;; init-themes.el ends here
