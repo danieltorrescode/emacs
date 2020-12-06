@@ -5,7 +5,7 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -49,6 +49,7 @@
 (require 'init-magit)
 (require 'init-flycheck)
 (require 'init-gnus)
+(require 'init-elfeed)
 ;;(require 'init-javascript)
 
 (custom-set-variables
@@ -58,7 +59,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (doom-theme org-bullets evil projectile yasnippet-snippets yasnippet counsel swiper mark-multiple which-key auto-complete avy use-package tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode))))
+    (elfeed doom-theme org-bullets evil projectile yasnippet-snippets yasnippet counsel swiper mark-multiple which-key auto-complete avy use-package tabbar session pod-mode muttrc-mode mutt-alias markdown-mode initsplit htmlize graphviz-dot-mode folding eproject diminish csv-mode browse-kill-ring boxquote bm bar-cursor apache-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
