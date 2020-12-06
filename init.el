@@ -48,6 +48,7 @@
 
 (require 'init-magit)
 (require 'init-flycheck)
+(require 'init-gnus)
 ;;(require 'init-javascript)
 
 (custom-set-variables
