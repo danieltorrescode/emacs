@@ -4,6 +4,7 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))
