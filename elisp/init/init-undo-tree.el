@@ -4742,6 +4742,6 @@ specifies `saved', and a negative prefix argument specifies
 
 
 
-(provide 'undo-tree)
+(provide 'init-undo-tree)
 
-;;; undo-tree.el ends here
+;;; init-undo-tree.el ends here

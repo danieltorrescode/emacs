@@ -154,6 +154,6 @@
 ;; ready.  You can put it _anywhere_ in your configuration.
 (exwm-enable)
 
-(provide 'exwm-custom-config)
+(provide 'init-exwm)
 
-;;; exwm-custom-config.el ends here
+;;; init-exwm.el ends here
