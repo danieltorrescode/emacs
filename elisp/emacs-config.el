@@ -34,7 +34,7 @@
 (global-display-line-numbers-mode)
 
 ;; set relative number
-(setq display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative)
 
 ;;show line and column
 (setq column-number-mode t)
@@ -57,6 +57,16 @@
 ;;enable all disabled commands in one
 (setq disabled-command-function nil)
 
+;; Show Paren Match
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; Debug enable
+(setq debug-on-error t)
+
+;; Electric Pair mode, provides a way to easily insert matching delimiters
+(electric-pair-mode 1)
+
 ;;Default shell should be bash
 (defvar my-term-shell "/bin/bash")
 
@@ -65,84 +75,13 @@
 
 (ad-activate 'ansi-term)
 
-;; Super + Enter opens a new terminal
-(global-set-key (kbd "<s-return>") 'eshell)
-(global-set-key (kbd "s-s") 'shell)
-(global-set-key (kbd "s-a") 'ansi-term)
-
-;; Transparency
-;; (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
-;; (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
-
- (defun toggle-transparency ()
-   (interactive)
-   (let ((alpha (frame-parameter nil 'alpha)))
-     (set-frame-parameter
-      nil 'alpha
-      (if (eql (cond ((numberp alpha) alpha)
-                     ((numberp (cdr alpha)) (cdr alpha))
-                     ;; Also handle undocumented (<active> <inactive>) form.
-                     ((numberp (cadr alpha)) (cadr alpha)))
-               100)
-          '(85 . 50) '(100 . 100)))))
- (global-set-key (kbd "C-c t") 'toggle-transparency)
-
- ;; Set transparency of emacs
- (defun transparency (value)
-   "Sets the transparency of the frame window. 0=transparent/100=opaque"
-   (interactive "nTransparency Value 0 - 100 opaque:")
-   (set-frame-parameter (selected-frame) 'alpha value))
-
-;;Ibuffer Config
+;; global keybinds
+(global-set-key (kbd "<M-return>") 'eshell)
+(global-set-key (kbd "M-t") 'term)
+(global-set-key (kbd "M-s") 'shell)
+(global-set-key (kbd "C-S-M-a") 'ansi-term)
+(global-set-key (kbd "M-d") 'dashboard-open)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-               ("dired" (mode . dired-mode))
-               ("org" (name . ".org$"))
-               ("magit" (mode . magit-mode))
-               ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-               ("web" (or (mode . web-mode) (mode . js2-mode)))
-               ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-               ("mu4e" (or
-                        (mode . mu4e-compose-mode)
-                        (name . "\*mu4e\*")
-                        ))
-               ("programming" (or
-                               (mode . clojure-mode)
-                               (mode . clojurescript-mode)
-                               (mode . python-mode)
-                               (mode . c++-mode)))
-               ("emacs" (or
-                         (name . "^\\*scratch\\*$")
-                         (name . "^\\*Messages\\*$")))
-               ))))
-
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-auto-mode 1)
-            (ibuffer-switch-to-saved-filter-groups "default")))
-
-;; don't show these
-;;(add-to-list 'ibuffer-never-show-predicates "zowie")
-;; Don't show filter groups if there are no buffers in that group
-(setq ibuffer-show-empty-filter-groups nil)
-
-;; Don't ask for confirmation to delete marked buffers
-(setq ibuffer-expert t)
-
-;;Close all buffers
-(defun close-all-buffers ()
-  "Kill all buffers without regard for their origin."
-  (interactive)
-  (mapc 'kill-buffer (buffer-list)))
-(global-set-key (kbd "C-M-k") 'close-all-buffers)
-
-;; Show Paren Match
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-
-;; Debug enable
-(setq debug-on-error t)
 
 (provide 'emacs-config)
 ;;; emacs-config.el ends here
