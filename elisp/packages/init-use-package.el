@@ -7,6 +7,6 @@
 	(package-refresh-contents)
 	(package-install 'use-package))
 
-(provide 'use-package)
+(provide 'init-use-package)
 
-;;; use-package.el ends here
+;;; init-use-package.el ends here

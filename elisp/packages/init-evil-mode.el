@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(unless (package-installed-p 'goto-chg)
-  (package-install 'goto-chg))
-(require 'goto-chg)
-
 ;; Download Evil
 (unless (package-installed-p 'evil)
   (package-install 'evil))

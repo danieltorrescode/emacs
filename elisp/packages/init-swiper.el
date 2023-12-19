@@ -1,7 +1,7 @@
 ;;; init-swiper.el --- Summary
 ;;; Commentary:
 
-;; Swiper gives us a really efficient incremental search 
+;; Swiper gives us a really efficient incremental search
 ;; with regular expressions
 
 ;;; Code:

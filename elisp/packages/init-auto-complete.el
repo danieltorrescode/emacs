@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package auto-complete 
+(use-package auto-complete
  :ensure t
 :init
 (progn

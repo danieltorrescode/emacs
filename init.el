@@ -4,7 +4,6 @@
 
 (require 'package)
 (setq package-enable-at-startup nil)
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "http://elpa.gnu.org/packages/")))
@@ -15,25 +14,32 @@
 ;; now can install use-package
 
 (add-to-list 'load-path (concat user-emacs-directory "elisp"))
-(add-to-list 'load-path (concat user-emacs-directory "elisp" "/init"))
+(add-to-list 'load-path (concat user-emacs-directory "elisp" "/packages"))
 
 (require 'emacs-config)
-(require 'use-package)
 
-(require 'init-themes)
-(require 'init-icons)
-(require 'init-org-bullets)
-(require 'init-projectile)
-(require 'init-dashboard)
+(require 'init-use-package)
 
 (require 'init-swiper)
 (require 'init-ivy)
 (require 'init-counsel)
 (require 'init-auto-complete)
+
+(require 'init-org-bullets)
 (require 'init-which-key)
 (require 'init-undo-tree)
+(require 'init-goto-chg)
 
 (require 'init-evil-mode)
+
+(require 'init-icons)
+(require 'init-projectile)
+(require 'init-dashboard)
+(require 'init-themes)
+
+(require 'init-lsp-mode)
+(require 'init-flycheck)
+(require 'init-magit)
 
 ;; (require 'init-gnus)
 ;; (require 'init-elfeed)

@@ -67,6 +67,9 @@
 ;; Electric Pair mode, provides a way to easily insert matching delimiters
 (electric-pair-mode 1)
 
+;; tell Emacs to put all backups that it creates in the TRASH directory.
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+
 ;;Default shell should be bash
 (defvar my-term-shell "/bin/bash")
 

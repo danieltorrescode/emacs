@@ -3,12 +3,12 @@
 ;;; Code:
 
 (use-package which-key
-    :ensure t 
+    :ensure t
     :config
     (which-key-mode))
 
 ;; (use-package which-key-posframe		;
-;;      :ensure t 
+;;      :ensure t
 ;;      :config
 ;;      (which-key-posframe-mode))
 
