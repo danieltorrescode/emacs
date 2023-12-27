@@ -70,6 +70,12 @@
 ;; tell Emacs to put all backups that it creates in the TRASH directory.
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 
+;; Sort Directories First
+(setq dired-listing-switches "-aBhl  --group-directories-first")
+
+;; show whitespaces
+;; (global-whitespace-mode t)
+
 ;;Default shell should be bash
 (defvar my-term-shell "/bin/bash")
 
@@ -85,6 +91,12 @@
 (global-set-key (kbd "C-S-M-a") 'ansi-term)
 (global-set-key (kbd "M-d") 'dashboard-open)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; Zooming In/Out
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
 (provide 'emacs-config)
 ;;; emacs-config.el ends here

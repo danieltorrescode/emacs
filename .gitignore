@@ -28,3 +28,5 @@ bookmarks
 elpy
 elpy/*
 url/*
+.cache/
+.lsp-session-v1
