@@ -1,6 +1,14 @@
-;;; lsp-mode.el --- Summary
+;;; init-development.el --- Summary
 ;;; Commentary:
 ;;; Code:
+
+(use-package magit
+  :ensure t)
+
+(use-package flycheck
+  :ensure t
+  :defer t
+  :init (global-flycheck-mode))
 
 (use-package lsp-mode
   :ensure t
@@ -30,6 +38,23 @@
   :ensure t)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-(provide 'init-lsp-mode)
 
-;;; init-lsp-mode.el ends here
+;; (setq c-default-style "linux"
+;;       c-basic-offset 4)
+
+;; (unless (package-installed-p 'prettier-js)
+;;   (package-install 'prettier-js))
+
+;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+;; (add-hook 'web-mode-hook 'prettier-js-mode)
+
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
+
+(provide 'init-development)
+
+;;; init-development.el ends here

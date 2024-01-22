@@ -1,4 +1,4 @@
-;;; exwm-custom-config.el --- Summary
+;;; init-exwm.el --- Summary
 ;;; Commentary:
 ;;; Code:
 

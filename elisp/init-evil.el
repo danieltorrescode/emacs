@@ -1,8 +1,18 @@
-;;; init-evil-mode.el --- Summary
+;;; init-evil.el --- Summary
 ;;; Commentary:
 ;;; Code:
 
-;; Download Evil
+(unless (package-installed-p 'undo-tree)
+  (package-install 'undo-tree))
+
+(require 'undo-tree)
+
+
+(unless (package-installed-p 'goto-chg)
+  (package-install 'goto-chg))
+
+(require 'goto-chg)
+
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 
@@ -28,5 +38,5 @@
 (require 'evil)
 (evil-mode 1)
 
-(provide 'init-evil-mode)
-;;; init-evil-mode.el ends here
+(provide 'init-evil)
+;;; init-evil.el ends here

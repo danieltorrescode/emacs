@@ -1,6 +1,17 @@
-;;; emacs-config.el --- Summary
+;;; settings.el --- Summary
 ;;; Commentary:
 ;;; Code:
+
+(require 'package)
+(setq package-enable-at-startup nil)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
+;; first type the above lines and run the init.el script
+;; then run M-x package-refresh-contents
+;; now can install use-package
 
 ;; Disable menus and scrollbars
 (tool-bar-mode -1)
@@ -91,6 +102,7 @@
 (global-set-key (kbd "C-S-M-a") 'ansi-term)
 (global-set-key (kbd "M-d") 'dashboard-open)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x /") 'comment-line)
 
 ;; Zooming In/Out
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -98,5 +110,6 @@
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
-(provide 'emacs-config)
-;;; emacs-config.el ends here
+
+(provide 'settings)
+;;; settings.el ends here
