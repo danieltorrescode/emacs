@@ -12,41 +12,21 @@
 ;;      :config
 ;;      (which-key-posframe-mode))
 
-(use-package auto-complete
+(use-package company
   :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
-(ac-config-default)
+  :defer 2
+  :custom
+  (company-begin-commands '(self-insert-command))
+  (company-idle-delay .1)
+  (company-minimum-prefix-length 2)
+  (company-show-numbers t)
+  (company-tooltip-align-annotations 't)
+  (global-company-mode t))
 
-(global-auto-complete-mode t)
-;; Type M-x auto-complete-mode to enable
-
-;; dirty fix for having AC everywhere
-(define-globalized-minor-mode real-global-auto-complete-mode
-  auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-                           (auto-complete-mode 1))
-                       ))
-(real-global-auto-complete-mode t)
-
-;; (use-package company
-;;   :ensure t
-;;   :defer 2
-;;   :custom
-;;   (company-begin-commands '(self-insert-command))
-;;   (company-idle-delay .1)
-;;   (company-minimum-prefix-length 2)
-;;   (company-show-numbers t)
-;;   (company-tooltip-align-annotations 't)
-;;   (global-company-mode t))
-
-;; (use-package company-box
-;;   :ensure t
-;;   :after company
-;;   :hook (company-mode . company-box-mode))
+(use-package company-box
+  :ensure t
+  :after company
+  :hook (company-mode . company-box-mode))
 
 
 (use-package ivy
