@@ -111,7 +111,7 @@
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
 (add-to-list 'default-frame-alist
-             '(font . "hack-12"))
+             '(font . "DejaVu Sans Mono-12"))
 
 
 (provide 'settings)
