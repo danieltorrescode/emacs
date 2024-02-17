@@ -110,8 +110,37 @@
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
+;; set font
 (add-to-list 'default-frame-alist
              '(font . "hack-12"))
+
+
+;; With Emacs version 29, true transparency has been added.
+;; (set-frame-parameter nil 'alpha-background 80)
+;; (add-to-list 'default-frame-alist '(alpha-background . 80))
+
+;; Transparency
+;; (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
+;; (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
+
+(defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(85 . 50) '(100 . 100)))))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+
+;; Set transparency of emacs
+(defun transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
 
 
 (provide 'settings)

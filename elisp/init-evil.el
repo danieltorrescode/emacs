@@ -25,6 +25,7 @@
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-redo)
   :config
   (evil-define-key 'normal 'global (kbd "C-n") 'tab-new)
   (evil-mode 1))

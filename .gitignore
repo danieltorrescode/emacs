@@ -30,3 +30,4 @@ elpy/*
 url/*
 .cache/
 .lsp-session-v1
+tree-sitter/
