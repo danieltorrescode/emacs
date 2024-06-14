@@ -142,6 +142,37 @@
   (interactive "nTransparency Value 0 - 100 opaque:")
   (set-frame-parameter (selected-frame) 'alpha value))
 
+;; org-agenda
+(global-set-key (kbd "C-x a") 'org-agenda)
+(setq org-agenda-files '("~/Documents/emacs.org"))
+
+(setq
+ ;; org-fancy-priorities-list '("[A]" "[B]" "[C]")
+ ;; org-fancy-priorities-list '("❗" "[B]" "[C]")
+ org-fancy-priorities-list '("🟥" "🟧" "🟨")
+ org-priority-faces
+ '((?A :foreground "#ff6c6b" :weight bold)
+   (?B :foreground "#fdf300" :weight bold)
+   (?C :foreground "#39bbfb" :weight bold))
+ org-agenda-block-separator 8411)
+
+(setq org-agenda-custom-commands
+      '(("v" "Agenda view"
+         ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
+          (tags "PRIORITY=\"B\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Medium-priority unfinished tasks:")))
+          (tags "PRIORITY=\"C\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Low-priority unfinished tasks:")))
+          (tags "customtag"
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Tasks marked with customtag:")))
+
+          (agenda "")
+          (alltodo "")))))
 
 (provide 'settings)
 ;;; settings.el ends here

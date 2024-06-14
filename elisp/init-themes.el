@@ -73,10 +73,10 @@
 ;;   :defer t
 ;;   :init (load-theme 'spacemacs-dark t))
 
-(use-package doom-themes
- :ensure t
- :config
- (load-theme 'doom-one t))
+;; (use-package doom-themes
+;;  :ensure t
+;;  :config
+;;  (load-theme 'doom-one t))
 
 (use-package doom-modeline
   :ensure t
