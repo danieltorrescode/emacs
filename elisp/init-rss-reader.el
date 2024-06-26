@@ -14,21 +14,21 @@
   :config
   (setq elfeed-goodies/entry-pane-size 0.5))
 
-(use-package elfeed-tube
-  :ensure t ;; or :straight t
-  :after elfeed
-  :demand t
-  :config
-  (setq elfeed-tube-auto-save-p nil) ; default value
-  (setq elfeed-tube-auto-fetch-p t)  ; default value
-  (elfeed-tube-setup)
+;; (use-package elfeed-tube
+;;   :ensure t ;; or :straight t
+;;   :after elfeed
+;;   :demand t
+;;   :config
+;;   (setq elfeed-tube-auto-save-p nil) ; default value
+;;   (setq elfeed-tube-auto-fetch-p t)  ; default value
+;;   (elfeed-tube-setup)
 
-  :bind (:map elfeed-show-mode-map
-              ("F" . elfeed-tube-fetch)
-              ([remap save-buffer] . elfeed-tube-save)
-              :map elfeed-search-mode-map
-              ("F" . elfeed-tube-fetch)
-              ([remap save-buffer] . elfeed-tube-save)))
+;;   :bind (:map elfeed-show-mode-map
+;;               ("F" . elfeed-tube-fetch)
+;;               ([remap save-buffer] . elfeed-tube-save)
+;;               :map elfeed-search-mode-map
+;;               ("F" . elfeed-tube-fetch)
+;;               ([remap save-buffer] . elfeed-tube-save)))
 
 
 (global-set-key (kbd "C-x w") 'elfeed)

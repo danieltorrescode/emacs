@@ -60,6 +60,7 @@
   :config
   (dashboard-setup-startup-hook))
 
+(global-set-key (kbd "M-d") 'dashboard-open)
 
 ;;(setq custom-safe-themes t)
 ;;(add-to-list 'custom-theme-load-path (concat user-emacs-directory "elisp/"))

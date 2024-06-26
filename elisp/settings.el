@@ -100,7 +100,6 @@
 (global-set-key (kbd "M-t") 'term)
 (global-set-key (kbd "M-s") 'shell)
 (global-set-key (kbd "C-S-M-a") 'ansi-term)
-(global-set-key (kbd "M-d") 'dashboard-open)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x /") 'comment-line)
 
