@@ -184,8 +184,8 @@
 
 (require 'init-evil)
 (require 'init-themes)
-(require 'init-completion)
-(require 'init-development)
+;; (require 'init-completion)
+;; (require 'init-development)
 
 (provide 'init)
 ;;; init.el ends here
