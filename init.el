@@ -7,17 +7,9 @@
 (require 'settings)
 
 (require 'init-evil)
-(require 'init-completion)
 (require 'init-themes)
-(require 'init-rss-reader)
+(require 'init-completion)
 (require 'init-development)
-
-;; (unless (package-installed-p 'exwm)
-;;   (package-install 'exwm))
-
-;; (require 'exwm)
-;; (require 'exwm-config)
-;; (require 'init-exwm)
 
 (provide 'init)
 ;;; init.el ends here
