@@ -99,9 +99,6 @@
 (ido-mode 1)
 (ido-everywhere 1)
 
-;; enable which-key
-(which-key-mode)
-
 ;; global keybinds
 (global-set-key (kbd "<M-return>") 'eshell)
 (global-set-key (kbd "M-t") 'term)
