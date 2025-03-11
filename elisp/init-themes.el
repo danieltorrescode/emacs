@@ -54,9 +54,6 @@
                           (bookmarks . 5)
                           (projects . 5)
                           (registers . 5)))
-  :custom
-  (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book")))
   :config
   (dashboard-setup-startup-hook))
 
