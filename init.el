@@ -1,4 +1,4 @@
-;;; init.el --- Summary
+;;; init.el --- Summary -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -91,6 +91,7 @@
 (defvar my-term-shell "/bin/bash")
 
 (defadvice ansi-term (before force-bash)
+  "Set ans-term."
   (interactive (list my-term-shell)))
 
 (ad-activate 'ansi-term)
@@ -118,6 +119,43 @@
              '(font . "hack-12"))
 
 
+;; IBuffer Config
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org" (name . "^.*org$"))
+               ("magit" (mode . magit-mode))
+               ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
+               ("web" (or (mode . web-mode) (mode . js2-mode)))
+               ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+               ("mu4e" (or
+
+                        (mode . mu4e-compose-mode)
+                        (name . "\*mu4e\*")
+                        ))
+               ("programming" (or
+                               (mode . typescript-ts-mode)
+                               (mode . tsx-ts-mode)
+                               (mode . python-ts-mode)
+                               (mode . yaml-ts-mode)
+                               (mode . bash-ts-mode)
+                               (mode . c-ts-mode)))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")))
+               ))))
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-auto-mode 1)
+            (ibuffer-switch-to-saved-filter-groups "default")))
+
+;; Don't show filter groups if there are no buffers in that group
+(setq ibuffer-show-empty-filter-groups nil)
+
+;; Don't ask for confirmation to delete marked buffers
+(setq ibuffer-expert t)
+
+
 ;; With Emacs version 29, true transparency has been added.
 ;; (set-frame-parameter nil 'alpha-background 80)
 ;; (add-to-list 'default-frame-alist '(alpha-background . 80))
@@ -126,25 +164,34 @@
 ;; (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
 ;; (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
 
-(defun toggle-transparency ()
-  (interactive)
-  (let ((alpha (frame-parameter nil 'alpha)))
-    (set-frame-parameter
-     nil 'alpha
-     (if (eql (cond ((numberp alpha) alpha)
-                    ((numberp (cdr alpha)) (cdr alpha))
-                    ;; Also handle undocumented (<active> <inactive>) form.
-                    ((numberp (cadr alpha)) (cadr alpha)))
-              100)
-         '(85 . 50) '(100 . 100)))))
-(global-set-key (kbd "C-c t") 'toggle-transparency)
+(defvar my-transparency-level 80
+  "Default transparency level when toggling transparency.")
 
-;; Set transparency of emacs
 (defun transparency (value)
-  "Sets the transparency of the frame window. 0=transparent/100=opaque"
-  (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha value))
+  "Set the transparency VALUE of the frame window.
+0 = fully transparent, 100 = fully opaque."
+  (interactive "nTransparency Value (0-100): ")
+  (setq my-transparency-level value)
+  (set-frame-parameter (selected-frame) 'alpha-background value)
+  (message "Transparency set to %d" value))
 
+(defun toggle-transparency ()
+  "Toggle transparency using `alpha-background` in Emacs 29+.
+Respects the value set by `transparency` function."
+  (interactive)
+  (let* ((current-alpha (frame-parameter nil 'alpha-background))
+         (new-alpha (if (or (not current-alpha) (= current-alpha 100))
+                        my-transparency-level
+                      100)))
+    (set-frame-parameter nil 'alpha-background new-alpha)
+    (message "Transparency set to %d" new-alpha)))
+
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+(global-set-key (kbd "C-c T") 'transparency)  ;; Assign `transparency` to "C-c T"
+
+
+
+(require 'org-tempo)
 ;; org-agenda
 (global-set-key (kbd "C-x a") 'org-agenda)
 (setq org-agenda-files '("~/Documents/emacs.org"))
@@ -181,8 +228,9 @@
 
 (require 'init-evil)
 (require 'init-themes)
-;; (require 'init-completion)
-;; (require 'init-development)
+(require 'init-completion)
+(require 'init-development)
+(require 'init-rss-reader)
 
 (provide 'init)
 ;;; init.el ends here
@@ -193,7 +241,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(modus-vivendi))
  '(org-agenda-files '("~/Documents/emacs.org"))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(all-the-icons-dired all-the-icons-ivy company-box counsel dashboard
+                         doom-modeline elfeed-goodies evil-collection
+                         flycheck magit neotree org-bullets
+                         treemacs-evil treemacs-icons-dired
+                         treemacs-projectile undo-tree)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

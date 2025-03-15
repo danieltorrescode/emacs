@@ -1,9 +1,8 @@
-;;; init-evil.el --- Summary
+;;; init-evil.el --- Summary -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
-(unless (package-installed-p 'undo-tree)
-  (package-install 'undo-tree))
+(unless (package-installed-p 'undo-tree) (package-install 'undo-tree))
 
 (require 'undo-tree)
 
