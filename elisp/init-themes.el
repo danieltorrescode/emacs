@@ -53,11 +53,12 @@
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   ;; (setq dashboard-set-footer nil)
   (setq dashboard-footer-messages '(""))
+  (setq dashboard-projects-backend 'projectile)
+  ;; (setq dashboard-projects-switch-function 'projectile-persp-switch-project)
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
                           (bookmarks . 5)
-                          (projects . 5)
-                          (registers . 5)))
+                          (projects . 5)))
   (dashboard-setup-startup-hook))
 
 (global-set-key (kbd "M-d") 'dashboard-open)

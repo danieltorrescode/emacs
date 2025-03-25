@@ -2,19 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq treesit-language-source-alist
-      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-        (c "https://github.com/tree-sitter/tree-sitter-c")
-        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-        (python "https://github.com/tree-sitter/tree-sitter-python")
-        (html "https://github.com/tree-sitter/tree-sitter-html")
-        (css "https://github.com/tree-sitter/tree-sitter-css")
-        (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-        (json "https://github.com/tree-sitter/tree-sitter-json")
-        (node "https://github.com/tree-sitter/node-tree-sitter")
-        (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-        (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-        (bash "https://github.com/tree-sitter/tree-sitter-bash")))
+
+;; (setq c-default-style "linux"
+;;       c-basic-offset 4)
 
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)))
@@ -46,13 +36,6 @@
          (tsx-ts-mode . company-mode))
   :mode (("\\.tsx\\'" . tsx-ts-mode)))
 
-;; Define the LSP servers for each language
-(setq eglot-server-programs
-      '((python-ts-mode . ("pyright-langserver" "--stdio"))
-        (rust-ts-mode . ("rust-analyzer"))
-        ((typescript-ts-mode tsx-ts-mode) . ("typescript-language-server" "--stdio"))))
-
-;; ("C-M-s-\\" . eglot-format)
 
 (use-package neotree
   :ensure t
@@ -73,10 +56,8 @@
                  (setq auto-hscroll-mode nil)))))
 
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-(global-set-key [f8] 'neotree-toggle)
-
-;; (setq c-default-style "linux"
-;;       c-basic-offset 4)
+;; (global-set-key (kbd "<f8>") 'neotree-toggle)
+(global-set-key (kbd "C-c b") 'neotree-toggle)
 
 ;; optionally if you want to use debugger
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language

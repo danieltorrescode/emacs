@@ -1,16 +1,6 @@
-;;; init-completion.el --- Summary
+;;; init-completion.el --- Summary --- Configuration  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
-
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode))
-
-;; (use-package which-key-posframe		;
-;;      :ensure t
-;;      :config
-;;      (which-key-posframe-mode))
 
 (use-package company
   :ensure t

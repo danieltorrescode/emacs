@@ -32,3 +32,5 @@ url/*
 .lsp-session-v1
 tree-sitter/
 eln-cache/
+history
+saveplace 
