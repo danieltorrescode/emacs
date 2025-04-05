@@ -22,6 +22,7 @@
    ("M-j" . duplicate-dwim)
    ("M-g r" . recentf)
    ("M-s g" . grep)
+   ("M-s C-g" . rgrep)
    ("M-s f" . find-name-dired)
    ("C-x C-b" . ibuffer)
    ("RET" . newline-and-indent)
@@ -96,7 +97,7 @@
   (window-combination-resize t)
   (window-resize-pixelwise nil)
   (xref-search-program 'ripgrep)
-  (grep-command "rg -nS --no-heading ")
+  (grep-command "grep -nH -e ")
   (grep-find-ignored-directories
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" "build" "dist"))
   :config
@@ -136,11 +137,8 @@
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
 
-
   ;; Set line-number-mode with relative numbering
   (setq display-line-numbers-type 'relative)
-  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-
 
   ;; Add option "d" to whenever using C-x s or C-x C-c, allowing a quick preview
   ;; of the diff of what you're asked to save.
@@ -225,6 +223,7 @@
   (winner-mode)
   (xterm-mouse-mode 1)
   (file-name-shadow-mode 1) ; allows us to type a new path without having to delete the current one
+  (global-display-line-numbers-mode t)
 
   ;; enable IDO mode
   (ido-mode 1)
@@ -1008,8 +1007,6 @@ and restart Flymake to apply the changes."
   :ensure nil
   :defer t
   :mode ("\\.org\\'" . org-mode)
-  :hook
-  (after-init . display-line-numbers-mode)
   :config
   (setq
    ;; Start collapsed for speed
@@ -1197,7 +1194,7 @@ and restart Flymake to apply the changes."
          ;; :box (:line-width 1 :color "#676E95")
          )))))
   :init
-  (load-theme 'modus-vivendi t))
+  (load-theme 'modus-vivendi-tinted t))
 
 
 ;;; -------------------- NON TREESITTER AREA
@@ -1274,20 +1271,20 @@ and restart Flymake to apply the changes."
   (add-to-list 'treesit-language-source-alist '(markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")))
 
 ;;; YAML-TS-MODE
-(use-package yaml-ts-mode
-  :ensure yaml-ts-mode
-  :mode "\\.yml\\'"
-  :defer 't
-  :config
-  (add-to-list 'treesit-language-source-alist '(yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml" "master" "src")))
+;; (use-package yaml-ts-mode
+;;   :ensure yaml-ts-mode
+;;   :mode "\\.yml\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(yaml "https://github.com/ikatyang/tree-sitter-yaml" "master" "src")))
 
 ;;; DOCKERFILE-TS-MODE
-(use-package dockerfile-ts-mode
-  :ensure dockerfile-ts-mode
-  :mode "\\Dockerfile.*\\'"
-  :defer 't
-  :config
-  (add-to-list 'treesit-language-source-alist '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "main" "src")))
+;; (use-package dockerfile-ts-mode
+;;   :ensure dockerfile-ts-mode
+;;   :mode "\\Dockerfile.*\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "main" "src")))
 
 
 ;;; ------------------- EMACS-SOLO CUSTOMS
@@ -1372,6 +1369,58 @@ and restart Flymake to apply the changes."
 
 
 
+
+;;; EMACS-SOLO-EXEC-PATH-FROM-SHELL
+;;
+;;  Loads users default shell PATH settings into Emacs. Usefull
+;;  when calling Emacs directly from GUI systems.
+;;
+(use-package emacs-solo-exec-path-from-shell
+  :ensure nil
+  :no-require t
+  :defer t
+  :init
+  (defun emacs/set-exec-path-from-shell-PATH ()
+    "Set up Emacs' `exec-path' and PATH environment the same as user Shell."
+    (interactive)
+    (let ((path-from-shell
+           (replace-regexp-in-string
+            "[ \t\n]*$" "" (shell-command-to-string
+                            "$SHELL --login -c 'echo $PATH'"))))
+      (setenv "PATH" path-from-shell)
+      (setq exec-path (split-string path-from-shell path-separator))
+      (message ">>> emacs: PATH loaded")))
+
+  (defun emacs/fix-asdf-path ()
+  "Ensure asdf shims and active Node.js version's bin directory are first in PATH."
+  (interactive)
+  (let* ((asdf-shims (expand-file-name "~/.asdf/shims"))
+         (node-bin (string-trim (shell-command-to-string "asdf where nodejs 2>/dev/null")))
+         (new-paths (list asdf-shims)))
+
+    ;; If Node.js is installed, add its bin path
+    (when (file-directory-p node-bin)
+      (push (concat node-bin "/bin") new-paths))
+
+    ;; Remove old asdf-related paths from PATH and exec-path
+    (setq exec-path (seq-remove (lambda (p) (string-match-p "/\\.asdf/" p)) exec-path))
+    (setenv "PATH" (string-join (seq-remove (lambda (p) (string-match-p "/\\.asdf/" p))
+                                            (split-string (getenv "PATH") ":"))
+                                ":"))
+
+    ;; Add the new paths to exec-path and PATH
+    (dolist (p (reverse new-paths))
+      (unless (member p exec-path) (push p exec-path))
+      (unless (member p (split-string (getenv "PATH") ":"))
+        (setenv "PATH" (concat p ":" (getenv "PATH")))))))
+
+  (add-hook 'find-file-hook #'emacs/fix-asdf-path)
+  (add-hook 'eshell-mode-hook #'emacs/fix-asdf-path)
+  (add-hook 'eshell-pre-command-hook #'emacs/fix-asdf-path)
+  (add-hook 'eshell-directory-change-hook #'emacs/fix-asdf-path)
+
+  (add-hook 'after-init-hook #'emacs/set-exec-path-from-shell-PATH)
+  (add-hook 'after-init-hook #'emacs/fix-asdf-path))
 
 ;;; EMACS-SOLO-RAINBOW-DELIMITERS
 ;;

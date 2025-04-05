@@ -33,4 +33,6 @@ url/*
 tree-sitter/
 eln-cache/
 history
-saveplace 
+saveplace
+custom-vars.el
+projects

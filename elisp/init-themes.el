@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+
+;; (use-package all-the-icons-install-fonts
+;;   :ensure t)
+;; press "M-x" keybinding
+;; call the function "all-the-icons-install-fonts" from  prompt.
+
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
@@ -25,20 +31,16 @@
   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
   )
 
-;; (use-package all-the-icons-install-fonts
-;;   :ensure t)
-;; press "M-x" keybinding
-;; call the function "all-the-icons-install-fonts" from  prompt.
 
-(use-package projectile
-    :ensure t
-    :init
-        (projectile-mode +1))
+;; (use-package projectile
+;;     :ensure t
+;;     :init
+;;         (projectile-mode +1))
 
 ;; Recommended keymap prefix on Windows/Linux
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 ;; Let projectile call make
-(global-set-key (kbd "<f5>") 'projectile-compile-project)
+;; (global-set-key (kbd "<f5>") 'projectile-compile-project)
 
 
 (use-package dashboard
@@ -53,7 +55,7 @@
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   ;; (setq dashboard-set-footer nil)
   (setq dashboard-footer-messages '(""))
-  (setq dashboard-projects-backend 'projectile)
+  (setq dashboard-projects-backend 'project-el)
   ;; (setq dashboard-projects-switch-function 'projectile-persp-switch-project)
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )

@@ -1,4 +1,4 @@
-;;; init-rss-reader.el --- Summary
+;;; init-rss-reader.el --- Summary -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
