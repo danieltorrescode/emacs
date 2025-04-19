@@ -1879,7 +1879,6 @@ Windows are labeled starting from the top-left window and proceeding top to bott
 (require 'init-themes)
 (require 'init-completion)
 (require 'init-development)
-(require 'init-rss-reader)
 
 (provide 'init)
 ;;; init.el ends here
