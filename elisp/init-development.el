@@ -39,11 +39,6 @@
   :init (global-flycheck-mode))
 
 
-;;; PRETTIER
-(load "prettier-js.el")
-(require 'prettier-js)
-(global-set-key (kbd "C-c I") 'prettier-js)
-
 ;;; DAP DEBUGGER
 ;; optionally if you want to use debugger
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
@@ -114,6 +109,11 @@
 (use-package magit
   :ensure t)
 
+;;; PRETTIER
+(load "prettier-js.el")
+(require 'prettier-js)
+(global-set-key (kbd "C-c I") 'prettier-js)
+
 ;;; PROGRAMMING MODES GENERAL CONFIG
 
 ;; (setq c-default-style "linux"
@@ -150,6 +150,53 @@
          (tsx-ts-mode . prettier-js-mode)
          (tsx-ts-mode . company-mode))
   :mode (("\\.tsx\\'" . tsx-ts-mode)))
+
+
+;;;; JS-TS-MODE
+;; (use-package js-ts-mode
+;;   :ensure js ;; I care about js-base-mode but it is locked behind the feature "js"
+;;   :mode "\\.jsx?\\'"
+;;   :defer 't
+;;   :custom
+;;   (js-indent-level 2)
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+;;   (add-to-list 'treesit-language-source-alist '(jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc" "master" "src")))
+
+;;;; TOML-TS-MODE
+;; (use-package toml-ts-mode
+;;   :ensure toml-ts-mode
+;;   :mode "\\.toml\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(toml "https://github.com/ikatyang/tree-sitter-toml" "master" "src")))
+
+;;;; MARKDOWN-TS-MODE
+;; (use-package markdown-ts-mode
+;;   :ensure nil
+;;   :mode "\\.md\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'major-mode-remap-alist '(markdown-mode . markdown-ts-mode))
+;;   (add-to-list 'treesit-language-source-alist '(markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src"))
+;;   (add-to-list 'treesit-language-source-alist '(markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")))
+
+;;;; YAML-TS-MODE
+;; (use-package yaml-ts-mode
+;;   :ensure yaml-ts-mode
+;;   :mode "\\.yml\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(yaml "https://github.com/ikatyang/tree-sitter-yaml" "master" "src")))
+
+;;;; DOCKERFILE-TS-MODE
+;; (use-package dockerfile-ts-mode
+;;   :ensure dockerfile-ts-mode
+;;   :mode "\\Dockerfile.*\\'"
+;;   :defer 't
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "main" "src")))
+
 
 
 (provide 'init-development)

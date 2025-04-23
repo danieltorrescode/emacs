@@ -31,18 +31,6 @@
   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
   )
 
-
-;; (use-package projectile
-;;     :ensure t
-;;     :init
-;;         (projectile-mode +1))
-
-;; Recommended keymap prefix on Windows/Linux
-;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;; Let projectile call make
-;; (global-set-key (kbd "<f5>") 'projectile-compile-project)
-
-
 (use-package dashboard
   :ensure t
   :init

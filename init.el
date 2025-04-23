@@ -1196,13 +1196,6 @@ and restart Flymake to apply the changes."
   :init
   (load-theme 'modus-vivendi-tinted t))
 
-
-;;; -------------------- NON TREESITTER AREA
-;; ;;; SASS-MODE
-;; (use-package scss-mode
-;;   :mode "\\.sass\\'"
-;;   :defer t)
-
 ;;; -------------------- TREESITTER AREA
 
 (setq treesit-language-source-alist
@@ -1218,73 +1211,6 @@ and restart Flymake to apply the changes."
         (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
         (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
         (bash "https://github.com/tree-sitter/tree-sitter-bash")))
-
-
-;;; JS-TS-MODE
-(use-package js-ts-mode
-  :ensure js ;; I care about js-base-mode but it is locked behind the feature "js"
-  :mode "\\.jsx?\\'"
-  :defer 't
-  :custom
-  (js-indent-level 2)
-  :config
-  (add-to-list 'treesit-language-source-alist '(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
-  (add-to-list 'treesit-language-source-alist '(jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc" "master" "src")))
-
-;;; TYPESCRIPT-TS-MODE
-(use-package typescript-ts-mode
-  :mode "\\.ts\\'"
-  :defer 't
-  :custom
-  (typescript-indent-level 2)
-  :config
-  (add-to-list 'treesit-language-source-alist '(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-  (unbind-key "M-." typescript-ts-base-mode-map))
-
-;;; TYPESCRIPT-TS-MODE
-(use-package tsx-ts-mode
-  :mode "\\.tsx\\'"
-  :defer 't
-  :custom
-  (typescript-indent-level 2)
-  :config
-  (add-to-list 'treesit-language-source-alist '(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-  (unbind-key "M-." typescript-ts-base-mode-map))
-
-
-;;; TOML-TS-MODE
-(use-package toml-ts-mode
-  :ensure toml-ts-mode
-  :mode "\\.toml\\'"
-  :defer 't
-  :config
-  (add-to-list 'treesit-language-source-alist '(toml "https://github.com/ikatyang/tree-sitter-toml" "master" "src")))
-
-;;; MARKDOWN-TS-MODE
-(use-package markdown-ts-mode
-  :ensure nil
-  :mode "\\.md\\'"
-  :defer 't
-  :config
-  (add-to-list 'major-mode-remap-alist '(markdown-mode . markdown-ts-mode))
-  (add-to-list 'treesit-language-source-alist '(markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src"))
-  (add-to-list 'treesit-language-source-alist '(markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")))
-
-;;; YAML-TS-MODE
-;; (use-package yaml-ts-mode
-;;   :ensure yaml-ts-mode
-;;   :mode "\\.yml\\'"
-;;   :defer 't
-;;   :config
-;;   (add-to-list 'treesit-language-source-alist '(yaml "https://github.com/ikatyang/tree-sitter-yaml" "master" "src")))
-
-;;; DOCKERFILE-TS-MODE
-;; (use-package dockerfile-ts-mode
-;;   :ensure dockerfile-ts-mode
-;;   :mode "\\Dockerfile.*\\'"
-;;   :defer 't
-;;   :config
-;;   (add-to-list 'treesit-language-source-alist '(dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile" "main" "src")))
 
 
 ;;; ------------------- EMACS-SOLO CUSTOMS
