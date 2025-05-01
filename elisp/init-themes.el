@@ -16,12 +16,6 @@
   :ensure t
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
-(use-package all-the-icons-ivy
-
-  :ensure t
-  :init (all-the-icons-ivy-setup)
-  )
-
 (use-package nerd-icons
   :ensure t
   ;; :custom
@@ -30,6 +24,34 @@
   ;; but you can use any other Nerd Font if you want
   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
   )
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (nerd-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+
+(use-package org-bullets
+  :ensure t
+  :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
 (use-package dashboard
   :ensure t
@@ -52,17 +74,6 @@
   (dashboard-setup-startup-hook))
 
 (global-set-key (kbd "M-d") 'dashboard-open)
-
-
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
-
-
-(use-package org-bullets
-  :ensure t
-  :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
 (provide 'init-themes)
 
