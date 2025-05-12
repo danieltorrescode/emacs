@@ -1010,7 +1010,7 @@ and restart Flymake to apply the changes."
   :config
   (setq
    ;; Start collapsed for speed
-   org-startup-folded t
+   org-startup-folded 'fold
 
    ;; Edit settings
    org-auto-align-tags nil
@@ -1021,7 +1021,7 @@ and restart Flymake to apply the changes."
 
    ;; Org styling, hide markup etc.
    org-hide-emphasis-markers t
-   org-pretty-entities t
+   ;; org-pretty-entities t
 
    ;; Agenda styling
    org-agenda-tags-column 0
