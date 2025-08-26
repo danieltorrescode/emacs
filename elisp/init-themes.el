@@ -56,21 +56,23 @@
 (use-package dashboard
   :ensure t
   :init
-  :config
-  (setq initial-buffer-choice 'dashboard-open)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs Dashboard!")
-  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
-  ;; (setq dashboard-set-footer nil)
-  (setq dashboard-footer-messages '(""))
-  (setq dashboard-projects-backend 'project-el)
+  :custom
+  (initial-buffer-choice 'dashboard-open)
+  (dashboard-icon-type 'nerd-icons) ; use `nerd-icons' package
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-display-icons-p t)
+  (dashboard-banner-logo-title "Emacs Dashboard!")
+  (dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  (dashboard-center-content nil) ;; set to 't' for centered content
+  (dashboard-projects-backend 'project-el)
+  (dashboard-footer-messages '(""))
   ;; (setq dashboard-projects-switch-function 'projectile-persp-switch-project)
-  (setq dashboard-items '((recents . 10)
+  (dashboard-items '((recents . 10)
                           (agenda . 10)
                           (bookmarks . 10)
                           (projects . 10)))
+  :config
   (dashboard-setup-startup-hook))
 
 (global-set-key (kbd "M-d") 'dashboard-open)
