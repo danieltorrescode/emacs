@@ -146,6 +146,16 @@
   :ensure t
   ;; Optional customizations
   :custom
+  ;; Enable auto completion
+  (corfu-auto t)
+  ;; Time delay before showing suggestions (seconds)
+  (corfu-auto-delay 0)
+  ;; Minimum number of characters before showing completions
+  (corfu-auto-prefix 1)
+  ;; Optionally, cycle through candidates
+  (corfu-cycle t)
+  ;; Use TAB for completion
+  (corfu-quit-no-match 'separator)
   (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -189,7 +199,10 @@
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block)
-  ;; (add-hook 'completion-at-point-functions #'cape-history)
+  (add-hook 'completion-at-point-functions #'cape-elisp-symbol)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-history)
+  (add-hook 'completion-at-point-functions #'cape-line)
   ;; ...
 )
 

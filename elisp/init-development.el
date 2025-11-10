@@ -4,39 +4,39 @@
 
 
 ;;; FLYCHECK
-(use-package flycheck
-  :ensure t
-  :config
-  ;; (defun my/use-local-eslint ()
-  ;;   "Find the local eslint executable"
-  ;;   (interactive)
-  ;;   (when (and  (projectile-project-p) (member major-mode '(typescript-ts-mode tsx-ts-mode)))
-  ;;     (let ((path (expand-file-name "node_modules/.bin/eslint" (projectile-project-root))))
-  ;;       ;; (message "ESLint exec path: %s" path)  ;; Debugging
-  ;;       (setq flycheck-javascript-eslint-executable path)
-  ;;       path)))
+;; (use-package flycheck
+;;   :ensure t
+;;   :config
+;;   ;; (defun my/use-local-eslint ()
+;;   ;;   "Find the local eslint executable"
+;;   ;;   (interactive)
+;;   ;;   (when (and  (projectile-project-p) (member major-mode '(typescript-ts-mode tsx-ts-mode)))
+;;   ;;     (let ((path (expand-file-name "node_modules/.bin/eslint" (projectile-project-root))))
+;;   ;;       ;; (message "ESLint exec path: %s" path)  ;; Debugging
+;;   ;;       (setq flycheck-javascript-eslint-executable path)
+;;   ;;       path)))
 
-  (defun my/use-local-eslint ()
-    "Find the local eslint executable using project.el"
-    (interactive)
-    (when (and (project-current) (member major-mode '(typescript-ts-mode tsx-ts-mode)))
-      (let* ((project-root (car (project-roots (project-current))))
-             (path (expand-file-name "node_modules/.bin/eslint" project-root)))
-        ;; (message "ESLint exec path: %s" path)  ;; Debugging
-        (setq flycheck-javascript-eslint-executable path)
-        path)))
+;;   (defun my/use-local-eslint ()
+;;     "Find the local eslint executable using project.el"
+;;     (interactive)
+;;     (when (and (project-current) (member major-mode '(typescript-ts-mode tsx-ts-mode)))
+;;       (let* ((project-root (car (project-roots (project-current))))
+;;              (path (expand-file-name "node_modules/.bin/eslint" project-root)))
+;;         ;; (message "ESLint exec path: %s" path)  ;; Debugging
+;;         (setq flycheck-javascript-eslint-executable path)
+;;         path)))
 
 
-  (with-eval-after-load 'flycheck
-    (setq-default flycheck-disabled-checkers '(typescript-tslint)) ;; Disable TSLint
-    (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)     ;; Enable ESLint for TypeScript
-    (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)  ;; Enable ESLint for TSX files (React)
-    (flycheck-add-mode 'javascript-eslint 'js2-mode)
-    (flycheck-add-mode 'javascript-eslint 'js-mode))
+;;   (with-eval-after-load 'flycheck
+;;     (setq-default flycheck-disabled-checkers '(typescript-tslint)) ;; Disable TSLint
+;;     (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)     ;; Enable ESLint for TypeScript
+;;     (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)  ;; Enable ESLint for TSX files (React)
+;;     (flycheck-add-mode 'javascript-eslint 'js2-mode)
+;;     (flycheck-add-mode 'javascript-eslint 'js-mode))
 
-  (add-hook 'flycheck-mode-hook #'my/use-local-eslint)
-  :defer t
-  :init (global-flycheck-mode))
+;;   (add-hook 'flycheck-mode-hook #'my/use-local-eslint)
+;;   :defer t
+;;   :init (global-flycheck-mode))
 
 
 ;;; DAP DEBUGGER
@@ -105,50 +105,66 @@
 
 ;; (add-hook 'prog-mode-hook #'my-git-gutter-update-on-save)
 
-;;; MAGIT
-(use-package magit
-  :ensure t)
-
 ;;; PRETTIER
 (load "prettier-js.el")
-(require 'prettier-js)
-(global-set-key (kbd "C-c I") 'prettier-js)
+
+(defun project-local-prettier ()
+  "Return path to local prettier binary if available, else nil."
+  (let* ((root (locate-dominating-file default-directory "node_modules"))
+         (prettier (and root
+                        (expand-file-name "node_modules/.bin/prettier" root))))
+    (when (and prettier (file-executable-p prettier))
+      prettier)))
+
+(use-package prettier-js
+  :init
+  (global-set-key (kbd "C-c I") 'prettier-js)
+  :hook ((js-mode . prettier-js-mode)
+         (typescript-ts-mode . prettier-js-mode)
+         (tsx-ts-mode . prettier-js-mode)
+         (json-mode . prettier-js-mode))
+  :config
+  (defun use-project-prettier-if-available ()
+    (setq-local prettier-js-command
+                (or (project-local-prettier) "prettier")))
+  (add-hook 'prettier-js-mode-hook #'use-project-prettier-if-available))
 
 ;;; PROGRAMMING MODES GENERAL CONFIG
 
 ;; (setq c-default-style "linux"
 ;;       c-basic-offset 4)
 
-(setq major-mode-remap-alist
-      '((c-mode . c-ts-mode)))
-
 (use-package c-ts-mode
-  :hook ((c-ts-mode . eglot-ensure)
-         (c-ts-mode . company-mode))
+  :hook ((c-ts-mode . eglot-ensure))
   :mode (("\\.c\\'" . c-ts-mode)))
 
+(use-package html-ts-mode
+  :mode (("\\.html\\'" . html-ts-mode)))
+
+(use-package css-ts-mode
+  :mode (("\\.css\\'" . css-ts-mode)))
 
 (use-package yaml-ts-mode
-  :hook ((yaml-ts-mode . company-mode))
   :mode (("\\.yml\\'" . yaml-ts-mode)))
 
+(use-package json-ts-mode
+  :mode (("\\.json\\'" . json-ts-mode)))
+
+(use-package sql-mode
+  :mode (("\\.sql\\'" . sql-mode)))
+
 (use-package python-ts-mode
-  :hook ((python-ts-mode . eglot-ensure)
-         (python-ts-mode . company-mode))
+  :hook ((python-ts-mode . eglot-ensure))
   :mode (("\\.py\\'" . python-ts-mode)))
 
 (use-package typescript-ts-mode
   :hook ((typescript-ts-mode . eglot-ensure)
-         (tsx-ts-mode . hs-minor-mode)
-         (typescript-ts-mode . prettier-js-mode)
-         (typescript-ts-mode . company-mode))
+         (tsx-ts-mode . hs-minor-mode))
   :mode (("\\.ts\\'" . typescript-ts-mode)))
 
 (use-package tsx-ts-mode
   :hook ((tsx-ts-mode . eglot-ensure)
-         (tsx-ts-mode . hs-minor-mode)
-         (tsx-ts-mode . prettier-js-mode)
-         (tsx-ts-mode . company-mode))
+         (tsx-ts-mode . hs-minor-mode))
   :mode (("\\.tsx\\'" . tsx-ts-mode)))
 
 

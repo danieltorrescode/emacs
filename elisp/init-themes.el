@@ -58,6 +58,7 @@
   :init
   :custom
   (initial-buffer-choice 'dashboard-open)
+  (dashboard-show-shortcuts nil)
   (dashboard-icon-type 'nerd-icons) ; use `nerd-icons' package
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
@@ -67,6 +68,7 @@
   (dashboard-center-content nil) ;; set to 't' for centered content
   (dashboard-projects-backend 'project-el)
   (dashboard-footer-messages '(""))
+  (dashboard-week-agenda t)
   ;; (setq dashboard-projects-switch-function 'projectile-persp-switch-project)
   (dashboard-items '((recents . 10)
                           (agenda . 10)

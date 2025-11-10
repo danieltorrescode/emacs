@@ -26,6 +26,8 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
   (setq evil-want-C-u-scroll t)
+  (setq evil-overriding-maps nil)
+  (setq evil-intercept-maps nil)
   :config
   (evil-define-key 'normal 'global (kbd "C-n") 'tab-new)
   (evil-mode 1))

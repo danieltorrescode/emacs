@@ -118,6 +118,8 @@
     ;; if indent-tabs-mode is t, it means it may use tab, resulting mixed space and tab
     )
 
+  ;; disable all auth files entirely
+  (setq auth-sources nil)
   ;;enable all disabled commands in one
   (setq disabled-command-function nil)
   ;; Debug enable
@@ -286,15 +288,7 @@ Respects the value set by `transparency` function."
   (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 
   (with-current-buffer (get-buffer-create "*scratch*")
-    (insert (format ";;
-;; ███████╗███╗   ███╗ █████╗  ██████╗███████╗
-;; ██╔════╝████╗ ████║██╔══██╗██╔════╝██╔════╝
-;; █████╗  ██╔████╔██║███████║██║     ███████╗
-;; ██╔══╝  ██║╚██╔╝██║██╔══██║██║     ╚════██║
-;; ███████╗██║ ╚═╝ ██║██║  ██║╚██████╗███████║
-;; ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝
-;;
-;;   Loading time : %s
+    (insert (format ";;   Loading time : %s
 ;;   Packages     : %s
 ;;
 "
@@ -563,6 +557,8 @@ Respects the value set by `transparency` function."
            " >\n ")))
 
   (setq eshell-prompt-regexp "└─➜ ")
+
+  (setq eshell-path-env (getenv "PATH"))
 
   (add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
 
@@ -1005,6 +1001,8 @@ and restart Flymake to apply the changes."
 ;;; ORG
 (use-package org
   :ensure nil
+  :init
+  (global-set-key (kbd "C-x a") 'org-agenda)
   :defer t
   :mode ("\\.org\\'" . org-mode)
   :config
@@ -1038,7 +1036,6 @@ and restart Flymake to apply the changes."
 
   (require 'org-tempo)
   ;; org-agenda
-  (global-set-key (kbd "C-x a") 'org-agenda)
   (setq org-agenda-files '("~/Documents/emacs.org"))
 
   (setq
@@ -1200,16 +1197,17 @@ and restart Flymake to apply the changes."
 (setq treesit-language-source-alist
       '((cpp "https://github.com/tree-sitter/tree-sitter-cpp")
         (c "https://github.com/tree-sitter/tree-sitter-c")
-        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (bash "https://github.com/tree-sitter/tree-sitter-bash")
         (html "https://github.com/tree-sitter/tree-sitter-html")
         (css "https://github.com/tree-sitter/tree-sitter-css")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
         (json "https://github.com/tree-sitter/tree-sitter-json")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
         (node "https://github.com/tree-sitter/node-tree-sitter")
         (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
         (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-        (bash "https://github.com/tree-sitter/tree-sitter-bash")))
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
 
 
 ;;; ------------------- EMACS-SOLO CUSTOMS
