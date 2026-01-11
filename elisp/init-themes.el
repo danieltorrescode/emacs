@@ -68,12 +68,9 @@
   (dashboard-center-content nil) ;; set to 't' for centered content
   (dashboard-projects-backend 'project-el)
   (dashboard-footer-messages '(""))
-  (dashboard-week-agenda t)
   ;; (setq dashboard-projects-switch-function 'projectile-persp-switch-project)
-  (dashboard-items '((recents . 10)
-                          (agenda . 10)
-                          (bookmarks . 10)
-                          (projects . 10)))
+  (dashboard-items '((bookmarks . 10)
+                          (recents . 30)))
   :config
   (dashboard-setup-startup-hook))
 
