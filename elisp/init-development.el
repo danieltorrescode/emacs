@@ -122,7 +122,8 @@
   :hook ((js-mode . prettier-js-mode)
          (typescript-ts-mode . prettier-js-mode)
          (tsx-ts-mode . prettier-js-mode)
-         (json-mode . prettier-js-mode))
+         (css-ts-mode . prettier-js-mode)
+         (json-ts-mode . prettier-js-mode))
   :config
   (defun use-project-prettier-if-available ()
     (setq-local prettier-js-command
@@ -142,12 +143,14 @@
   :mode (("\\.html\\'" . html-ts-mode)))
 
 (use-package css-ts-mode
+  :hook ((css-ts-mode . eglot-ensure))
   :mode (("\\.css\\'" . css-ts-mode)))
 
 (use-package yaml-ts-mode
   :mode (("\\.yml\\'" . yaml-ts-mode)))
 
 (use-package json-ts-mode
+  :hook ((json-ts-mode . eglot-ensure))
   :mode (("\\.json\\'" . json-ts-mode)))
 
 (use-package sql-mode

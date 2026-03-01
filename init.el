@@ -854,6 +854,7 @@ Otherwise, open the repository's main page."
   ;; Define the LSP servers for each language
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs '((python-ts-mode . ("pyright-langserver" "--stdio"))
+                                          ((json-ts-mode) . ("vscode-json-languageserver" "--stdio"))
                                           ((typescript-ts-mode tsx-ts-mode) . ("typescript-language-server" "--stdio"))
                                           (ruby-mode ruby-ts-mode) "ruby-lsp")))
 
