@@ -1350,6 +1350,7 @@ and restart Flymake to apply the changes."
 (require 'init-themes)
 (require 'init-completion)
 (require 'init-development)
+(require 'init-emacs-agent)
 
 (provide 'init)
 ;;; init.el ends here
