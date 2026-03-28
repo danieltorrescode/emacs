@@ -29,18 +29,21 @@
   (setq evil-overriding-maps nil)
   (setq evil-intercept-maps nil)
   :config
-  (evil-define-key 'normal 'global (kbd "C-n") 'tab-new)
+  ;; (evil-define-key 'normal 'global (kbd "C-n") 'tab-new)
   (evil-mode 1))
 
 (use-package evil-collection
   :after evil
   :ensure t
   :config
-  (evil-collection-init))
-
-;; Enable Evil
-(require 'evil)
-(evil-mode 1)
+  ;; --- FIX FOR DASHBOARD ERROR ---
+  ;; This removes 'dashboard' from the list of modes evil-collection modifies.
+  ;; This prevents the (wrong-type-argument symbolp #f(...)) error.
+  ;; (setq evil-collection-mode-list (delq 'dashboard evil-collection-mode-list))
+  (setq evil-collection-mode-list (remove 'dashboard evil-collection-mode-list))
+  (evil-collection-init)
+  ;; (evil-collection-init '(calendar dired calc ediff))
+  )
 
 (provide 'init-evil)
 ;;; init-evil.el ends here
