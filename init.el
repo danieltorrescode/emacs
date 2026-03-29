@@ -105,10 +105,14 @@
   ;; won't ask for encoding (because undecided-unix) every single keystroke
   (modify-coding-system-alist 'file "" 'utf-8)
 
-  (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 105)
   ;; set font
-  (add-to-list 'default-frame-alist
-               '(font . "hack-12"))
+  (set-face-attribute 'default nil
+                      :family "Hack"
+                      :height 100
+                      :weight 'regular)
+
+  ;; (add-to-list 'default-frame-alist
+  ;;              '(font . "hack-10"))
 
   ;; Indent Basic
   (progn
@@ -130,10 +134,6 @@
   ;; Highligh current line
   (when window-system (add-hook 'prog-mode-hook 'hl-line-mode))
 
-  (when (eq system-type 'darwin)
-    (setq insert-directory-program "gls")
-    (setq mac-command-modifier 'meta)
-    (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 140))
 
   ;; Save manual customizations to other file than init.el
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
@@ -248,7 +248,7 @@
   ;; (set-frame-parameter (selected-frame) 'alpha '(85 . 50))
   ;; (add-to-list 'default-frame-alist '(alpha . (85 . 50)))
 
-  (defvar my-transparency-level 50
+  (defvar my-transparency-level 75
     "Default transparency level when toggling transparency.")
 
   (defun transparency (value)
@@ -272,6 +272,8 @@ Respects the value set by `transparency` function."
 
   (global-set-key (kbd "C-c t") 'toggle-transparency)
   (global-set-key (kbd "C-c T") 'transparency)  ;; Assign `transparency` to "C-c T"
+
+  (global-set-key (kbd "C-c b") 'bookmark-jump)
 
   ;; global keybinds
   (global-set-key (kbd "<M-return>") 'eshell)
@@ -1346,6 +1348,7 @@ and restart Flymake to apply the changes."
 
 (add-to-list 'load-path (concat user-emacs-directory "/elisp"))
 
+(require 'init-splash)
 (require 'init-evil)
 (require 'init-themes)
 (require 'init-completion)
