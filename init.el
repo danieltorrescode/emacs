@@ -108,7 +108,7 @@
   ;; set font
   (set-face-attribute 'default nil
                       :family "Hack"
-                      :height 100
+                      :height 120
                       :weight 'regular)
 
   ;; (add-to-list 'default-frame-alist

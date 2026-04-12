@@ -148,6 +148,14 @@
               ("C-n" . copilot-next-completion)
               ("C-p" . copilot-previous-completion)))
 
+
+;; ------------------------------------------------------------
+;; ECA (Editor Code Assistant)
+;; ------------------------------------------------------------
+
+(use-package eca
+  :vc (:url "https://github.com/editor-code-assistant/eca-emacs" :rev :newest))
+
 ;; ------------------------------------------------------------
 ;; Unified AI helpers
 ;; ------------------------------------------------------------
