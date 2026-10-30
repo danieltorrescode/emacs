@@ -4,26 +4,26 @@
 
 
 ;;; VTERM
-(use-package vterm
-  :ensure t
-  :commands vterm
-  :config
-  ;; Larger scrollback history limit
-  (setq vterm-max-scrollback 10000)
+;; (use-package vterm
+;;   :ensure t
+;;   :commands vterm
+;;   :config
+;;   ;; Larger scrollback history limit
+;;   (setq vterm-max-scrollback 10000)
 
-  ;; Default shell (leave nil to use the system shell or specify your preferred one)
-  (setq vterm-shell "/bin/zsh")
+;;   ;; Default shell (leave nil to use the system shell or specify your preferred one)
+;;   (setq vterm-shell "/bin/zsh")
 
-  ;; Increase chunk size read from processes to optimize rendering performance in vterm
-  (setq read-process-output-max (* 1024 1024)) ; 1MB
+;;   ;; Increase chunk size read from processes to optimize rendering performance in vterm
+;;   (setq read-process-output-max (* 1024 1024)) ; 1MB
 
-  ;; Disable line numbers inside the terminal buffer
-  (add-hook 'vterm-mode-hook
-            (lambda ()
-              (display-line-numbers-mode -1)))
+;;   ;; Disable line numbers inside the terminal buffer
+;;   (add-hook 'vterm-mode-hook
+;;             (lambda ()
+;;               (display-line-numbers-mode -1)))
 
-  ;; Automatically kill the buffer when the shell process exits (e.g., via 'exit')
-  (setq vterm-kill-buffer-on-exit t))
+;;   ;; Automatically kill the buffer when the shell process exits (e.g., via 'exit')
+;;   (setq vterm-kill-buffer-on-exit t))
 
 ;; Integration with vterm-toggle to open/hide the terminal with a single shortcut
 ;; (use-package vterm-toggle
@@ -93,17 +93,17 @@
 
 
 ;;; ORIGAMI
-(use-package origami
-  :ensure t
-  :hook ((prog-mode . origami-mode))  ;; Enable in programming modes
-  :bind (("C-c f t" . origami-toggle-node)   ;; Toggle folding
-         ("C-c f o" . origami-open-node)     ;; Open fold
-         ("C-c f O" . origami-open-node-recursively)
-         ("C-c f c" . origami-close-node)
-         ("C-c f C" . origami-close-node-recursively)
-         ("C-c f a" . origami-toggle-all-nodes))
-  :config
-  (message "Origami mode loaded"))
+;; (use-package origami
+;;   :ensure t
+;;   :hook ((prog-mode . origami-mode))  ;; Enable in programming modes
+;;   :bind (("C-c f t" . origami-toggle-node)   ;; Toggle folding
+;;          ("C-c f o" . origami-open-node)     ;; Open fold
+;;          ("C-c f O" . origami-open-node-recursively)
+;;          ("C-c f c" . origami-close-node)
+;;          ("C-c f C" . origami-close-node-recursively)
+;;          ("C-c f a" . origami-toggle-all-nodes))
+;;   :config
+;;   (message "Origami mode loaded"))
 
 ;;; GIT GUTTER
 ;; === Git Gutter + Fringe for Icons ===

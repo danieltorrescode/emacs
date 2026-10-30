@@ -1,6 +1,7 @@
 ;;; init-ia-integration.el --- AI tooling for Emacs -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Requires: use-package
+;;; Code:
 
 ;; ------------------------------------------------------------
 ;; ELLAMA (LLM interface optimized for Ollama)
@@ -138,16 +139,16 @@
 
 ;; @github/copilot-language-server
 
-(use-package copilot
-  :ensure t
-  ;; :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . copilot-accept-completion)
-              ("TAB" . copilot-accept-completion)
-              ("C-<tab>" . copilot-accept-completion-by-word)
-              ("C-TAB" . copilot-accept-completion-by-word)
-              ("C-n" . copilot-next-completion)
-              ("C-p" . copilot-previous-completion)))
+;; (use-package copilot
+;;   :ensure t
+;;   ;; :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . copilot-accept-completion)
+;;               ("TAB" . copilot-accept-completion)
+;;               ("C-<tab>" . copilot-accept-completion-by-word)
+;;               ("C-TAB" . copilot-accept-completion-by-word)
+;;               ("C-n" . copilot-next-completion)
+;;               ("C-p" . copilot-previous-completion)))
 
 
 ;; ------------------------------------------------------------
